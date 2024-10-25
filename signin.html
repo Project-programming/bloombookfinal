@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            Sign in to BloomBook!
+        </title>
+        
+        <style>
+            body {
+                font-family: 'Futura', sans-serif;
+                background-color: #f3f4f6;
+                margin: 0;
+                padding: 0;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                min-height: 100vh;
+            }
+    
+            h1 {
+                font-family: 'Futura', sans-serif;
+                text-align: center;
+                color: #4a7c59;
+                font-size: 2.5em;
+                margin-bottom: 20px;
+            }
+    
+            h2 {
+                color: #4a7c59;
+                font-size: 1.5em;
+                margin-bottom: 10px;
+            }
+    
+            .container {
+                background-color: #ffffff;
+                padding: 40px;
+                border-radius: 10px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                max-width: 500px;
+                width: 100%;
+            }
+    
+            .container form {
+                text-align: left;
+            }
+    
+            input {
+                width: calc(100% - 22px); /* Adjusted to fit inside the container */
+                height: 45px;
+                font-size: 1em;
+                border-radius: 8px;
+                padding: 10px;
+                margin-bottom: 20px;
+                box-sizing: border-box;
+                border: 1px solid #ccc;
+                transition: border-color 0.3s ease-in-out;
+            }
+    
+            input:focus {
+                border-color: #4a7c59;
+                outline: none;
+            }
+    
+            button {
+                font-size: 1.1em;
+                font-family: 'Futura', sans-serif;
+                border-radius: 8px;
+                text-align: center;
+                background-color: #3498db;
+                border: none;
+                color: #FFFFFF;
+                padding: 15px 20px;
+                width: 48%; /* Reduced width to fit two buttons in one line */
+                cursor: pointer;
+                margin: 10px 1%; /* Added margin to space between buttons */
+                transition: background-color 0.3s ease;
+            }
+    
+            button:hover {
+                background-color: #2980b9;
+            }
+    
+            .bottom-button-container {
+                text-align: center;
+                margin-top: 30px;
+            }
+    
+            .bottom-button-container a {
+                display: inline-block;
+                font-size: 1.1em;
+                font-family: 'Futura', sans-serif;
+                border-radius: 8px;
+                text-align: center;
+                background-color: #4a7c59;
+                color: #FFFFFF;
+                padding: 15px 30px;
+                text-decoration: none;
+                transition: background-color 0.3s ease;
+            }
+    
+            .bottom-button-container a:hover {
+                background-color: #3a6549;
+            }
+    
+            /* Ensure full-height for background image if added in the future */
+            .background-image {
+                position: fixed;
+                left: 0;
+                top: 0;
+                width: 50%;
+                height: 100%;
+                z-index: -1;
+                background-size: cover;
+                background-position: center;
+            }
+        </style>
+
+        <!--<link rel="stylesheet" type="text/css" href="/style.css"> -->
+        
+    </head>
+
+
+    <body>
+        
+        <div class="container"><h1> Sign in to your BloomBook account!</h1>
+        <div class="sec2">
+            <form action="http://localhost:8001/login" method="POST">
+                <div id="name">
+                    <h2 class="name">Email</h2>
+                    <input class="email" id="email" type="email" required name="email" placeholder="xyz@mail.com" size="40"><br>
+                    <h2 class="name">Password</h2>
+                    <input class="password" id="password" type="password" required name="password" placeholder="123456789" size="40"><br>
+
+                     <br>   
+                     <div style="text-align: center;">
+                     <button type="reset" id="reset" style="vertical-align:middle"><span>Clear </span></button>
+                     <button type="submit" id="submit" style="vertical-align:middle"><span>Sign in </span></button>
+                    </div>
+                     <br> 
+                     <br> 
+                     <div class="bottom-button-container">
+                        <a href="form/form.html">Don't have an account? Register here</a>
+                    </div>
+                    
+            </div>  
+            </form>
+        </div>
+    </div>
+
+        <!-- <script src="./forms/form.js"></script> -->
+
+    </body>
+</html>

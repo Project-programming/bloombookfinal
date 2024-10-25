@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign up for BloomBook!</title>
+    <style>
+        body {
+            font-family: 'Futura', sans-serif;
+            background-color: #f3f4f6;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        h1 {
+            font-family: 'Futura', sans-serif;
+            text-align: center;
+            color: #4a7c59;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            color: #4a7c59;
+            font-size: 1.5em;
+            margin-bottom: 10px;
+        }
+
+        .container {
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            width: 100%;
+        }
+
+        .container form {
+            text-align: left;
+        }
+
+        input {
+            width: calc(100% - 22px); /* Adjusted to fit inside the container */
+            height: 45px;
+            font-size: 1em;
+            border-radius: 8px;
+            padding: 10px;
+            margin-bottom: 20px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            transition: border-color 0.3s ease-in-out;
+        }
+
+        input:focus {
+            border-color: #4a7c59;
+            outline: none;
+        }
+
+        button {
+            font-size: 1.1em;
+            font-family: 'Futura', sans-serif;
+            border-radius: 8px;
+            text-align: center;
+            background-color: #3498db;
+            border: none;
+            color: #FFFFFF;
+            padding: 15px 20px;
+            width: 48%; /* Reduced width to fit two buttons in one line */
+            cursor: pointer;
+            margin: 10px 1%; /* Added margin to space between buttons */
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+        }
+
+        .bottom-button-container {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .bottom-button-container a {
+            display: inline-block;
+            font-size: 1.1em;
+            font-family: 'Futura', sans-serif;
+            border-radius: 8px;
+            text-align: center;
+            background-color: #4a7c59;
+            color: #FFFFFF;
+            padding: 15px 30px;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+
+        .bottom-button-container a:hover {
+            background-color: #3a6549;
+        }
+
+        /* Ensure full-height for background image if added in the future */
+        .background-image {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 50%;
+            height: 100%;
+            z-index: -1;
+            background-size: cover;
+            background-position: center;
+        }
+        #passwordError {
+            color: red;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Sign up for BloomBook!</h1>
+        <form  id="signupform" action="http://localhost:8001/submit" method="POST">
+            <h2>Name</h2>
+            <input id="name" type="text" required name="name" placeholder="Your Name">
+
+            <h2>Email</h2>
+            <input id="email" type="email" required name="email" placeholder="yourname@example.com">
+
+            <h2>Password</h2>
+            <input id="password" type="password" required name="password" placeholder="********">
+             
+
+            <div style="text-align: center;">
+                <button type="reset" id="reset">Clear</button>
+                <button type="submit" id="submit">Submit</button>
+            </div>
+        </form>
+        <div class="bottom-button-container">
+            <a href="/signin.html">Go to Sign in Page</a>
+        </div>
+    </div>
+<script>
+
+document.getElementById('signupform').addEventListener('submit', async function(event) {
+            event.preventDefault();  // Prevent default form submission
+
+            const password = document.getElementById('password').value;
+            const passwordError = document.getElementById('passwordError');
+
+            // Clear any previous error message
+            passwordError.style.display = 'none';
+
+            // Send form data to the server using Fetch API
+            try {
+                const response = await fetch('/submit', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ password })
+                });
+
+                // Handle server response
+                if (!response.ok) {
+                    const data = await response.json();
+                    passwordError.textContent = data.error;  // Display the error message from server
+                    passwordError.style.display = 'inline';  // Show the error message
+                } else {
+                    const data = await response.json();
+                    alert(data.message);  // Show success message or handle accordingly
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                passwordError.textContent = 'An error occurred. Please try again later.';
+                passwordError.style.display = 'inline';
+            }
+        }); 
+    
+
+
+
+
+
+
+
+
+
+    /*
+    // Get form and error message elements
+    const form = document.getElementById('signupform');
+    const passwordInput = document.getElementById('password');
+    const passwordError = document.getElementById('passwordError');
+
+    // Handle form submission via AJAX
+    form.addEventListener('submit', async function(event) {
+        event.preventDefault();  // Prevent the default form submission
+
+        // Collect form data
+        const formData = new FormData(form);
+
+        // Get the password value
+        const password = passwordInput.value;
+
+        // Clear any previous error message
+        passwordError.style.display = 'none';
+
+        // Perform client-side password length check
+        if (password.length < 8) {
+            passwordError.textContent = 'Password must be at least 8 characters long.';
+            passwordError.style.display = 'block';
+            return;  // Stop form submission if the password is too short
+        }
+        try {
+                const response = await fetch('/submit', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ password })
+                });
+
+                // Handle server response
+                if (!response.ok) {
+                    const data = await response.json();
+                    passwordError.textContent = data.error;  // Display the error message from server
+                    passwordError.style.display = 'inline';  // Show the error message
+                } else {
+                    const data = await response.json();
+                    alert(data.message);  // Show success message or handle accordingly
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                passwordError.textContent = 'An error occurred. Please try again later.';
+                passwordError.style.display = 'inline';
+            }
+         try {
+            // Send form data to the server using Fetch API
+            const response = await fetch('http://localhost:8001/submit', {
+                method: 'POST',
+                body: formData, // FormData sends data correctly in multipart/form-data format
+            });
+
+            // Check if the response is OK
+            if (!response.ok) {
+                // Server returned an error
+                const errorResult = await response.json();
+                passwordError.textContent = errorResult.error || 'An error occurred.';
+                passwordError.style.display = 'block';
+            } else {
+                // On success, redirect to sign-in page
+                window.location.href = '/signin.html';
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            passwordError.textContent = 'An error occurred. Please try again later.';
+            passwordError.style.display = 'block';
+        }});
+ */
+    
+
+        /* document.getElementById('signupForm').addEventListener('submit', async function(event) {
+            event.preventDefault();  // Prevent default form submission
+
+            const password = document.getElementById('password').value;
+            const passwordError = document.getElementById('passwordError');
+
+            // Clear any previous error message
+            passwordError.style.display = 'none';
+
+            // Send form data to the server using Fetch API
+            try {
+                const response = await fetch('/submit', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ password })
+                });
+
+                // Handle server response
+                if (!response.ok) {
+                    const data = await response.json();
+                    passwordError.textContent = data.error;  // Display the error message from server
+                    passwordError.style.display = 'inline';  // Show the error message
+                } else {
+                    const data = await response.json();
+                    alert(data.message);  // Show success message or handle accordingly
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                passwordError.textContent = 'An error occurred. Please try again later.';
+                passwordError.style.display = 'inline';
+            }
+        }); 
+        */
+        
+    </script> 
+</body>
+
+</html>

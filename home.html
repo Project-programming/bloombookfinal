@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BloomBook - Home</title>
+    <style>
+        body {
+            font-family: 'Futura', sans-serif;
+            background-color: #f3f4f6;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        header {
+            background-color: #4a7c59;
+            padding: 20px;
+            text-align: center;
+            color: white;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 3em;
+            letter-spacing: 2px;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 20px 0 0;
+            text-align: center;
+        }
+
+        nav ul li {
+            display: inline;
+            margin: 0 20px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.2em;
+            transition: color 0.3s ease-in-out;
+        }
+
+        nav ul li a:hover {
+            color: #9acd32;
+            text-decoration: underline;
+        }
+
+        .main-content {
+            max-width: 1200px;
+            margin: 60px auto;
+            padding: 30px;
+            text-align: center;
+            background-color: #ffffff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 15px;
+        }
+
+        .main-content h2 {
+            color: #4a7c59;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+
+        .main-content p {
+            font-size: 1.2em;
+            line-height: 1.8;
+            margin-bottom: 30px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .search-bar {
+            margin-bottom: 50px;
+        }
+
+        .search-bar input[type="text"] {
+            width: 60%;
+            padding: 15px;
+            font-size: 1.2em;
+            border: 2px solid #4a7c59;
+            border-radius: 25px;
+            outline: none;
+            transition: border-color 0.3s ease-in-out;
+        }
+
+        .search-bar input[type="text"]:focus {
+            border-color: #9acd32;
+        }
+
+        .search-bar button {
+            padding: 15px 30px;
+            font-size: 1.2em;
+            background-color: #4a7c59;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: background-color 0.3s ease-in-out;
+            margin-left: 10px;
+        }
+
+        .search-bar button:hover {
+            background-color: #9acd32;
+        }
+
+        .plant-categories {
+            margin-top: 50px;
+            text-align: left;
+        }
+
+        .plant-categories h3 {
+            font-size: 2em;
+            color: #4a7c59;
+            margin-bottom: 20px;
+        }
+
+        .plant-categories ul {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+
+        .plant-categories ul li {
+            margin-bottom: 20px;
+            flex: 1 1 calc(50% - 40px);
+            box-sizing: border-box;
+        }
+
+        .plant-categories ul li a {
+            display: block;
+            font-size: 1.3em;
+            color: #3498db;
+            text-decoration: none;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .plant-categories ul li a:hover {
+            background-color: #4a7c59;
+            color: white;
+        }
+
+        .about-section {
+            margin-top: 50px;
+            background-color: #e8f5e9;
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .about-section h3 {
+            font-size: 2.2em;
+            color: #4a7c59;
+            margin-bottom: 20px;
+        }
+
+        .about-section p {
+            font-size: 1.2em;
+            line-height: 1.8;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            margin-bottom: 0;
+        }
+
+        footer {
+            background-color: #4a7c59;
+            color: white;
+            text-align: center;
+            padding: 30px;
+            margin-top: 60px;
+            border-top: 1px solid #dcdcdc;
+        }
+
+        footer p {
+            margin: 0;
+            font-size: 1.2em;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Welcome to BloomBook</h1>
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/plants">Browse All Plants</a></li>
+                <li><a href="/profile">My Profile</a></li>
+                
+            </ul>
+        </nav>
+    </header>
+
+    <div class="main-content">
+        <h2>Your Online Plant Database</h2>
+        <p>Discover and manage a vast collection of plants. Whether you are a hobbyist, gardener, or professional, BloomBook offers a comprehensive database to help you explore, learn, and grow.</p>
+
+        <div class="search-bar">
+            <!-- Form that sends the search query to the backend -->
+            <form action="http://localhost:8001/plants" method="get">
+                <input type="text" name="search" placeholder="Search for plants...">
+                <button type="submit">Search</button>
+            </form>
+        </div>
+
+        <div class="plant-categories">
+            <h3>Popular Categories</h3>
+            <ul>
+                <li><a href="/plants?category=succulents">Succulents</a></li>
+                <li><a href="/plants?category=ferns">Ferns</a></li>
+                <li><a href="/plants?category=flowers">Flowers</a></li>
+                <li><a href="/plants?category=trees">Trees</a></li>
+                <li><a href="/plants?category=herbs">Herbs</a></li>
+                <li><a href="/plants?category=shrubs">Shrubs</a></li>
+            </ul>
+        </div>
+
+        <div class="about-section">
+            <h3>About BloomBook</h3>
+            <p>BloomBook is your go-to platform for everything related to plants. Our mission is to provide plant enthusiasts with a user-friendly interface to access information on thousands of plant species, connect with other plant lovers, and manage their own plant collections. Join our community and start your botanical journey today!</p>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 BloomBook. All rights reserved. | <a href="/privacy" style="color: white;">Privacy Policy</a> | <a href="/terms" style="color: white;">Terms of Service</a></p>
+    </footer>
+</body>
+</html>
+
+
+

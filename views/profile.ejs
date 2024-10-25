@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= name %>'s Profile</title>
+    <style>
+        body {
+            font-family: 'Futura', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #e9f5e9;
+            color: #333;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 20px 0 0;
+            text-align: center;
+        }
+
+        nav ul li {
+            display: inline;
+            margin: 0 20px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.2em;
+            transition: color 0.3s ease-in-out;
+        }
+
+        nav ul li a:hover {
+            color: #9acd32;
+            text-decoration: underline;
+        }
+
+        .container {
+            width: 80%;
+            margin: auto;
+            padding-top: 20px;
+        }
+
+        header {
+            background-color: #4f8658;
+            padding: 20px;
+            text-align: center;
+            color: white;
+            border-radius: 5px;
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 2.5em;
+        }
+
+        .profile-info {
+            text-align: center;
+            margin-bottom: 30px;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .profile-info p {
+            font-size: 1.2em;
+            margin: 10px 0;
+        }
+
+        .saved-plants {
+            margin-top: 30px;
+        }
+
+        .saved-plants h2 {
+            color: #4f8658;
+            font-size: 2em;
+            border-bottom: 2px solid #4f8658;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        .plant-item {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .plant-details {
+            max-width: 70%;
+        }
+
+        .plant-details h2 {
+            margin-top: 0;
+            color: #3498db;
+            font-size: 1.5em;
+        }
+
+        .plant-details p {
+            margin: 5px 0;
+        }
+
+        .saved-at {
+            font-size: 0.9em;
+            color: #777;
+        }
+
+        .profile-actions {
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        .profile-actions a {
+            text-decoration: none;
+            color: white;
+            background-color: #3498db;
+            padding: 10px 20px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            transition: background-color 0.3s ease;
+        }
+
+        .profile-actions a:hover {
+            background-color: #2980b9;
+        }
+        .profile-section {
+            margin-bottom: 30px;
+        }
+        .saved-plants-list, .growth-log-list {
+            list-style: none;
+            padding: 0;
+        }
+        .growth-log-item {
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 10px;
+            margin-bottom: 15px;
+            background-color: #f9f9f9;
+        }
+    </style>
+</head>
+<body>
+    <header>
+            <nav>
+                <ul>
+                    <li><a href="/home">Home</a></li>
+                    <li><a href="/profile">My Profile</a></li>
+                </ul>
+            </nav>
+        <br>
+        <h1>Welcome, <%= name %>!</h1>
+    </header>
+
+    <div class="container">
+        <div class="profile-info">
+            <p><strong>Email:</strong> <%= email %></p>
+        </div>
+
+        <div class="saved-plants">
+            <h2>Your Saved Plants</h2>
+
+            <% if (savedPlants.length === 0) { %>
+                <p>You haven't saved any plants yet.</p>
+            <% } else { %>
+                <% savedPlants.forEach(plant => { %>
+                    <div class="plant-item">
+                        <div class="plant-details">
+                            <h2><%= plant.name %> (<%= plant.scientific_name %>)</h2>
+                            <p font-family:'Futura'><%= plant.description %></p>
+                            <p class="saved-at">Saved on: <%= new Date(plant.saved_at).toLocaleString() %></p>
+                        </div>
+                    </div>
+                <% }); %>
+            <% } %>
+        </div>
+
+        <!--   <div class="saved-plants">
+            <h2>Growth Log</h2>
+            <p>You haven't saved any growth logs yet.</p>
+        </div> -->
+
+        <div class="profile-actions">
+            <a href="/plants">Explore More Plants</a>
+        </div>
+
+
+        <div class="saved-plants">
+            <h2>Growth Logs</h2>
+            <ul class="growth-log-list">
+                <% if (growthLogs.length > 0) { %>
+                    <% growthLogs.forEach(log => { %>
+                        <li class="growth-log-item">
+                            <strong>Plant:</strong> <%= log.plant_name %><br>
+                            <strong>Date:</strong> <%= new Date(log.logged_at).toLocaleString() %><br>
+                            <strong>Height:</strong> <%= log.height %> cm<br>
+                            <strong>Condition:</strong> <%= log.condition %><br>
+                            <strong>Notes:</strong> <%= log.notes %>
+                        </li>
+                    <% }); %>
+                <% } else { %>
+                    <li>No growth logs yet.</li>
+                <% } %>
+            </ul>
+        </div>
+
+
+    </div>
+</body>
+</html>
+

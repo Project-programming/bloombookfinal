@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plant Search Results</title>
+    <style>
+        header {
+            background-color: #4a7c59;
+            padding: 20px;
+            text-align: center;
+            color: white;
+        }
+        body {
+            font-family: 'Futura', sans-serif;
+            background-color: #f3f4f6;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        nav ul li {
+            display: inline;
+            margin: 0 15px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.2em;
+        }
+
+        nav ul li a:hover {
+            text-decoration: underline;
+        }
+
+        .plant-list {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: #ffffff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+
+        .plant-list h2 {
+            color: #4a7c59;
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+
+        .plant-item {
+            margin-bottom: 20px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background-color: #fafafa;
+        }
+
+        .plant-item h3 {
+            margin: 0;
+            font-size: 1.5em;
+            color: #3498db;
+        }
+
+        .plant-item p {
+            margin: 5px 0;
+            font-size: 1.1em;
+            color: #666;
+        }
+    </style>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="/home">Home</a></li>
+                <li><a href="/profile">My Profile</a></li>
+            </ul>
+        </nav>
+    </header>
+</head>
+<body>
+    <div class="plant-list">
+        <h2>Plant Search Results:</h2>
+        <% if (plants.length === 0) { %>
+            <p>No plants found.</p>
+        <% } else { %>
+            <% plants.forEach(plant => { %>
+                <div class="plant-item">
+                    <h3><a href="/plants/<%= plant.id %>">
+                        <%= plant.name %> (<%= plant.scientific_name %>)
+                    </a></h3>
+                    <p>Category: <%= plant.category %></p>
+                    <p>Description: <%= plant.description %></p>
+                </div>
+            <% }) %>
+        <% } %>
+    </div>
+    
+</body>
+</html>

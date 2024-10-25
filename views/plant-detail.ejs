@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= plant.name %> - Plant Details</title>
+    <style>
+        body {
+            font-family: 'Bodoni';
+            background-color: #f4f4f4;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        h2{
+            font-family: 'Futura';
+        }
+        header {
+            background-color: #4f8658;
+            padding: 20px;
+            text-align: center;
+            color: white;
+            border-radius: 5px;
+            font-family: 'Futura';
+        }
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 20px 0 0;
+            text-align: center;
+        }
+
+        nav ul li {
+            display: inline;
+            margin: 0 20px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.2em;
+            transition: color 0.3s ease-in-out;
+        }
+
+        nav ul li a:hover {
+            color: #9acd32;
+            text-decoration: underline;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            
+        }
+
+        h1 {
+            color: #4a7c59;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            text-align: center;
+            font-family: 'Futura';
+        }
+        h3 {
+            color: #4a7c59;
+            font-size: 1.1em;
+            margin-bottom: 20px;
+            text-align: center;
+            font-family: 'Futura';
+        }
+
+        .description {
+            margin: 20px 0;
+            font-size: 1.4em;
+            line-height: 1.6;
+        }
+
+        .plant-info {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        .plant-info div {
+            width: 45%;
+            margin-bottom: 20px;
+            color: #2c3e50; /* Different color for the details */
+        }
+
+        .plant-info div p {
+            margin: 5px 0;
+            font-size: 1.3em;
+        }
+
+        .buttons {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .buttons button {
+            padding: 15px 30px;
+            font-size: 1.1em;
+            font-family: 'Futura';
+            background-color: #4a7c59;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            margin: 10px;
+            transition: background-color 0.3s ease-in-out;
+
+        }
+
+        .buttons button:hover {
+            background-color: #9acd32;
+        }
+
+        .comments-section {
+            margin-top: 40px;
+            border-top: 2px solid #ddd;
+            padding-top: 20px;
+        }
+
+        .comments-section h3 {
+            font-size: 1.8em;
+            color: #4a7c59;
+            margin-bottom: 10px;
+            text-align: center;
+            font-family: 'Futura';
+        }
+
+        .comment-box {
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .comment-box textarea {
+            width: 100%;
+            padding: 10px;
+            font-size: 1.1em;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            resize: vertical;
+            font-family: 'Futura';
+        }
+
+        .comment-box button {
+            align-self: flex-end;
+            padding: 10px 20px;
+            font-size: 1.1em;
+            background-color: #4a7c59;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        .comment-box button:hover {
+            background-color: #9acd32;
+        }
+
+        .comments-list {
+            margin-top: 20px;
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .comments-list li {
+            padding: 10px;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        .comments-list li strong {
+            color: #4a7c59;
+        }
+
+        .back-link {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .back-link a {
+            font-size: 1.1em;
+            color: #3498db;
+            text-decoration: none;
+            transition: color 0.3s ease-in-out;
+            font-family: 'Futura';
+        }
+
+        .back-link a:hover {
+            color: #2980b9;
+        }
+
+        .log-growth-section, .growth-logs-section {
+            margin-top: 30px;
+        }
+        .growth-log-form .form-group {
+            margin-bottom: 15px;
+        }
+        .form-control {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        .btn {
+            padding: 10px 20px;
+            background-color: #3498db;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-family: 'Futura';
+        }
+        .btn-primary {
+            background-color: #2980b9;
+            font-family: 'Futura';
+        }
+        .growth-log-list {
+            list-style: none;
+            padding: 0;
+        }
+        .growth-log-item {
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 10px;
+            margin-bottom: 15px;
+            background-color: #f9f9f9;
+        }
+        .log-details {
+            line-height: 1.5;
+        }
+        .no-logs {
+            text-align: center;
+            color: #888;
+        }
+        .log-growth-section {
+        background-color: #f9f9f9;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        max-width: 600px;
+        margin: 0 auto;
+        }
+
+        .growth-log-form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+        }
+
+        .form-group {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            margin-right: 10px;
+        }
+
+        .form-group:last-child {
+            margin-right: 0;
+        }
+
+        label {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .form-control {
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+            width: 100%;
+        }
+
+        textarea.form-control {
+            height: 100px;
+            resize: vertical;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .btn {
+            background-color: #3498db;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+            font-family: 'Futura';
+        }
+
+        .btn-primary:hover {
+            background-color: #2980b9;
+            font-family: 'Futura';
+        }
+
+        .btn-primary:active {
+            background-color: #1f6391;
+            font-family: 'Futura';
+        }
+
+        .btn-primary:focus {
+            outline: none;
+            font-family: 'Futura';
+        }
+    </style>
+</head>
+<header>
+    <nav>
+        <ul>
+            <li><a href="/home">Home</a></li>
+            <li><a href="/profile">My Profile</a></li>
+        </ul>
+    </nav>
+</header>
+<body>
+    <div class="container">
+        <h1><%= plant.name %> (<%= plant.scientific_name %>)</h1>
+
+        <div class="description">
+            <p><%= plant.description %></p>
+        </div>
+
+        <div class="plant-info">
+            <div>
+                <p><strong>Category:</strong> <%= plant.category %></p>
+                <p><strong>Sunlight:</strong> <%= plant.sunlight %></p>
+                <p><strong>Water Needs:</strong> <%= plant.water_needs %></p>
+                <p><strong>Soil:</strong> <%= plant.soil %></p>
+            </div>
+            <div>
+                <p><strong>Growth Rate:</strong> <%= plant.growthrate %></p>
+                <p><strong>Temperature:</strong> <%= plant.temperature %></p>
+                <p><strong>Bloom Time:</strong> <%= plant.bloomtime %></p>
+                <p><strong>Other Info:</strong> <%= plant.other_info %></p>
+            </div>
+        </div>
+
+        <div class="buttons">
+            <% if (user) { %>
+                <% if (isSaved) { %>
+                    <button disabled>Saved to Profile</button>
+                <% } else { %>
+                    <form action="/plants/<%= plant.id %>/save" method="POST">
+                        <button type="submit">Save to Profile</button>
+                    </form>
+                <% } %>
+            <% } else { %>
+                <p><a href="/signin.html">Sign in</a> to save this plant to your profile.</p>
+            <% } %>
+        </div>
+
+        <div class="comments-section">
+            <!-- Comments Section -->
+            <h3>Comments</h3>
+
+            <% if (user) { %>
+                <div class="comment-box">
+                    <form action="/plants/<%= plant.id %>/comments" method="POST">
+                        <textarea name="comment" placeholder="Add your comment" required></textarea>
+                        <button type="submit">Submit Comment</button>
+                    </form>
+                </div>
+            <% } else { %>
+                <p>You need to <a href="/signin">sign in</a> to leave a comment.</p>
+            <% } %>
+
+            <ul class="comments-list">
+                <% if (comments && comments.length > 0) { %>
+                    <% comments.forEach(comment => { %>
+                        <li>
+                            <strong><%= comment.author_name %>:</strong> 
+                            <%= comment.comment %> 
+                            <span>(on <%= new Date(comment.commented_at).toLocaleString() %>)</span>
+                        </li>
+                    <% }); %>
+                <% } else { %>
+                    <li>No comments yet.</li>
+                <% } %>
+            </ul>
+        </div>
+        <div class="log-growth-section">
+            <h3>Log Growth</h3>
+            <% if (user) { %>
+                <form action="/plants/<%= plant.id %>/log-growth" method="POST" class="growth-log-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="height">Height (cm):</label>
+                            <input type="number" name="height" id="height" step="0.1" required class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="condition">Condition:</label>
+                            <input type="text" name="condition" id="condition" required class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="notes">Notes:</label>
+                        <textarea name="notes" id="notes" class="form-control"></textarea>
+                    </div>
+                    <div class="button-container">
+                        <button type="submit" class="btn btn-primary">Submit Growth Log</button>
+                    </div>
+                </form>
+            <% } else { %>
+                <p>You need to <a href="/signin">sign in</a> to log growth.</p>
+            <% } %>
+        </div>
+        
+        <h2>Growth Logs</h2>
+        <ul class="growth-log-list">
+            <% if (growthLogs && growthLogs.length > 0) { %>
+                <% growthLogs.forEach(log => { %>
+                    <li class="growth-log-item">
+                        <div class="log-details"> 
+                        <strong>Date:</strong> <%= new Date(log.logged_at).toLocaleString() %><br>
+                        <strong>Height:</strong> <%= log.height %> cm<br>
+                        <strong>Condition:</strong> <%= log.condition %><br>
+                        <strong>Notes:</strong> <%= log.notes %>
+                    </div>
+                    </li>
+                <% }); %>
+            <% } else { %>
+                <li>No growth logs yet.</li>
+            <% } %>
+        </ul>
+        
+        <div class="back-link">
+            <a href="/plants">Back to search results</a>
+        </div>
+    </div>
+</body>
+</html>
+
+
